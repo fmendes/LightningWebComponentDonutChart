@@ -1,0 +1,54 @@
+<template>
+
+
+<svg id="layer_1" xmlns="http://www.w3.org/2000/svg" 
+xmlns:xlink="http://www.w3.org/1999/xlink"
+width={chartWidth} height="100%" viewBox="-4 0 68 43" >
+        
+<circle class="donut-hole" cx="21" cy="21" 
+        r="15.91549430918954" 
+        fill="white" ></circle>
+<circle class="donut-ring" cx="21" cy="21" 
+        r="15.91549430918954" 
+        fill="transparent" stroke="lightgray" 
+        stroke-width="7" ></circle>
+
+<template for:each={listOfChartElements} for:item="e">
+    <circle key={e.name} cx="21" cy="21" r="15.91549430918954" 
+        fill="transparent" stroke-width="7" 
+        stroke={e.color}
+        stroke-dasharray={e.percentExpression} 
+        stroke-dashoffset={e.offset} >
+  </circle>
+  <text key={e.name} class="chart-legend" color="white"
+        x={e.labelXposition} y={e.labelYposition} >
+        <template if:true={displayLabels}>
+            <tspan>{e.label}</tspan>
+        </template>
+        <template if:true={displayValues}>
+            <tspan dy="1em" dx={valueSectorOffset} >{e.value}</tspan>
+        </template>
+  </text>
+</template>
+
+<template for:each={listOfChartElements} for:item="e">
+    <g key={e.name} class="chart-text chart-legend chart-legend-box" >
+        <rect x="44" y={e.legendY} width="2" height="2" 
+                stroke="black" stroke-width="0.125" 
+                fill={e.color} ></rect>
+        <text x="46.5" y={e.legendTextY} >{e.label}</text>
+    </g>
+</template>
+
+<g class="chart-main-text">
+    <text x="21" y="21" class="chart-main-number">
+        {number}
+    </text>
+    <text x="21" y="23" class="chart-main-label">
+        {label}
+    </text>
+</g>
+
+</svg>
+
+</template>
